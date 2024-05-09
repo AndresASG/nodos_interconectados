@@ -17,14 +17,26 @@ def main(page: ft.Page):
         disabled=False,
         text_align=ft.TextAlign.CENTER,
         content_padding=250,
+        multiline=True,
+        min_lines=3,
+            max_lines=10,
     )
 
     #esta seria la funcion que seria como la de iniciar_simulacion
-    
-       
+    def construir_filas():
+        env = simpy.Environment()
+        nodos = []
         
+    def iniciar_simulacion():
+        env.run(until=10)
+        print(vector)
+        campo.value ="\n".join(str(event) for event in vector)
+        print('Simulación finalizada')
+        page.update()
 
-    
+    def button_click(e):
+        iniciar_simulacion()
+        
         
         
 
@@ -36,10 +48,12 @@ def main(page: ft.Page):
                     style=ft.TextStyle(size=30, weight="wavy", font_family="italic", color="blue")),
                      ft.Row(
             [
-            ft.OutlinedButton(
+            ft.ElevatedButton(
                 text="Construir red de filas",
-                on_click=button_click,
+                
                 width=200,
+                on_click=button_click,
+
                 
                 
                 ),
@@ -111,7 +125,6 @@ def main(page: ft.Page):
     for i in range(3):
         env.process(cliente(env, f'Cliente {i+1}', nodos[0], nodos, probabilidad_transicion))
 
-    # Ejecutar simulación
-    env.run()
+    
 
 ft.app(main)
